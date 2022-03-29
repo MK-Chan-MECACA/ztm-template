@@ -33,7 +33,7 @@
                 <circle cx="12" cy="12" r="11" />
                 <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
               </svg>
-              <p class="ml-4">Contact us to know more about<br/><font class="text-md font-bold text-gray-900">HOW TO DIGITAL TRANSFORMATION</font></p>
+              <p class="ml-4">Contact us to know more about<br><font class="text-md font-bold text-gray-900">HOW TO DIGITAL TRANSFORMATION</font></p>
             </li>
           </ul>
     </div>

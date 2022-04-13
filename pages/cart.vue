@@ -11,7 +11,7 @@
             <NuxtLink to="/menu">Our Menu</NuxtLink>
             <li>Location</li>
             <li>Contacts</li>
-            <NuxtLink to="/cart">Cart</NuxtLink>
+            <NuxtLink to="/cart">Cart({{ $store.getters.totalItems }})</NuxtLink>
           </ul>
         </div>
       </div>
@@ -37,12 +37,40 @@
           class="font-oswald uppercase text-2xl border-b"
         >
           <td class="py-10">{{ order.name }}</td>
-          <td class="text-right">RM {{ order.price }}</td>
+          <td class="text-right">RM {{ order.price.toFixed(2) }}</td>
           <td class="text-center">{{ order.quantity }}</td>
-          <td class="text-right">RM {{ order.price * order.quantity }}</td>
-          <td class="text-center"><button>✖️</button></td>
+          <td class="text-right">RM {{ (order.price * order.quantity).toFixed(2) }}</td>
+          <td class="text-center"><button @click="removeItem(order.name)">✖️</button></td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr class="font-oswald font-bold text-2xl bg-gray-100 uppercase">
+          <td class="py-10" colspan="3">Total</td>
+          <td class="text-right">RM {{ total.toFixed(2) }}</td>
+          <td />
+        </tr>
+      </tfoot>
     </table>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    total() {
+      let total = 0;
+      this.$store.state.orders.forEach((order) => {
+        total = total + order.price * order.quantity;
+      });
+
+      return total;
+    },
+  },
+
+  methods: {
+    removeItem(name) {
+      this.$store.commit('removeItem', name);
+    },
+  },
+};
+</script>

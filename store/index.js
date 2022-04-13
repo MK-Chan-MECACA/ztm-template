@@ -29,7 +29,6 @@ const mutations = {
   },
 };
 
-
 const getters = {
   totalItems(state) {
     return state.orders.length;

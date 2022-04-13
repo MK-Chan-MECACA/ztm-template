@@ -11,7 +11,7 @@
             <NuxtLink to="/menu">Our Menu</NuxtLink>
             <li>Location</li>
             <li>Contacts</li>
-            <NuxtLink to="/cart">Cart</NuxtLink>
+            <NuxtLink to="/cart">Cart({{ $store.getters.totalItems }})</NuxtLink>
           </ul>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 <template>
   <div>
     <div class="bg-[url('/menu-page.jpg')] px-20">
@@ -7,10 +8,10 @@
         </div>
         <div id="menu-right">
           <ul class="grid grid-cols-5 text-lg font-oswald text-white uppercase pt-5">
-            <li>About Us</li>
+            <li class="text-ellipsis overflow-hidden">About Us</li>
             <NuxtLink to="/menu">Our Menu</NuxtLink>
-            <li>Location</li>
-            <li>Contacts</li>
+            <li class="text-ellipsis overflow-hidden">Location</li>
+            <li class="text-ellipsis overflow-hidden">Contacts</li>
             <NuxtLink to="/cart">Cart({{ $store.getters.totalItems }})</NuxtLink>
           </ul>
         </div>
@@ -20,7 +21,7 @@
       </h1>
     </div>
 
-    <table class="table-auto w-2/3 mt-20 mx-auto">
+    <table class="table-auto w-2/3 mt-20 mx-auto mb-20">
       <thead>
         <tr>
           <th class="text-left">Name</th>
@@ -49,6 +50,24 @@
           <td class="text-right">RM {{ total.toFixed(2) }}</td>
           <td />
         </tr>
+        <tr>
+          <td colspan="3">
+            <input
+              id="email"
+              type="email"
+              placeholder="Please enter your email"
+              class="w-full border border-gray-300 text-xl mt-5 py-3 px-2"
+            />
+          </td>
+          <td colspan="2" class="text-right">
+            <button
+              class="font-oswald uppercase bg-red-500 text-white text-xl py-3 px-2 ml-5 mt-5"
+              @click="submitOrder"
+            >
+              Confirm My Order
+            </button>
+          </td>
+        </tr>
       </tfoot>
     </table>
   </div>
@@ -70,6 +89,12 @@ export default {
   methods: {
     removeItem(name) {
       this.$store.commit('removeItem', name);
+    },
+    submitOrder() {
+      this.$axios.post('/.netlify/functions/email', {
+        email: document.getElementById('email').value,
+        orders: this.$store.state.orders,
+      });
     },
   },
 };

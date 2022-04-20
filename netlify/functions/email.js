@@ -28,7 +28,7 @@ exports.handler = async function (event, context) {
     secure: true,
     auth: {
       user: 'apikey',
-      password: process.env.sendgridApiKey
+      pass: process.env.sendgridApiKey
     }
   })
 

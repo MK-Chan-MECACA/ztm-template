@@ -3,13 +3,14 @@ const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 const serviceAccount = JSON.parse(process.env.firebaseCredential);
 
-exports.hanlder = async function (event, context) {
+exports.handler = async function (event, context) {
   let app;
   if (admin.apps.length === 0) {
     app = initializeApp({
       credential: cert(serviceAccount),
-    })
+    });
   }
+
   const db = getFirestore(app);
 
   try {
@@ -19,13 +20,12 @@ exports.hanlder = async function (event, context) {
 
     const response = await db.collection('orders').add({
       customerEmail,
-      orders,
+      orders
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: 'Document added successfully - ' + response.id,
+      body: JSON.stringify({message: 'Document added successfully - ' + response.id,
       }),
     };
   } catch (error) {

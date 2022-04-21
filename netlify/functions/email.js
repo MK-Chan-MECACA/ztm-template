@@ -16,9 +16,9 @@ exports.handler = async function (event, context) {
   emailContent = emailContent + `\n Total Amount: ${total.toFixed(2)}`;
 
   const email = {
-    from: "chan@mecaca.global",
+    from: 'chan@mecaca.global',
     to: customerEmail,
-    subject: "New Order Received",
+    subject: 'New Order Received',
     text: emailContent,
   };
 
@@ -37,7 +37,7 @@ exports.handler = async function (event, context) {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: "Email sent successfully",
+        message: 'Email sent successfully',
       }),
     };
   } catch (error) {
